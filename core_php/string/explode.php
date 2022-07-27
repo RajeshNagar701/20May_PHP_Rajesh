@@ -1,7 +1,7 @@
 <?php
-$text="TOPS Technologies";
-$Sh=explode("",$text);
-print_r($sh);
+$string="TOPS Technologies";
+$arr=explode(",",$string);
+print_r($arr);
 
 
 //$im="Pratik, Shah";

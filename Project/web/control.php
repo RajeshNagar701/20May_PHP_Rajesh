@@ -61,7 +61,27 @@ class control extends model  // step 2 extends model class
 			include_once('signup.php');
 			break;
 			
-			
+			case '/contact':
+			if(isset($_REQUEST['submit']))
+			{
+				$name=$_REQUEST['name'];
+				$email=$_REQUEST['email'];
+				$message=$_REQUEST['message'];
+				
+				$arr=array("name"=>$name,"email"=>$email,"message"=>$message);
+				
+				$res=$this->insert('contact',$arr);
+				if($res)
+				{
+					echo "<script> alert('Inquiry Success') </script>";				
+				}
+				else
+				{
+					echo "Not success";
+				}
+			}
+			include_once('contact.php');
+			break;
 			
 			case '/login':
 			include_once('login.php');

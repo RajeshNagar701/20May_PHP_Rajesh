@@ -1,9 +1,11 @@
 <?php
+include_once('../web/model.php');
 
-class control
+class control extends model
 {
 	function __construct()
 	{
+		model::__construct();
 		
 		$path=$_SERVER['PATH_INFO'];
 		
@@ -24,16 +26,23 @@ class control
 			case '/profile':
 			include_once('profile.php');
 			break;
+			
 			case '/manage_user':
+			$customer_arr=$this->selectall('customer');
 			include_once('manage_user.php');
 			break;
+			
 			case '/manage_feedback':
+			$feedback_arr=$this->selectall('feedback');
 			include_once('manage_feedback.php');
 			break;
 			case '/manage_emp':
+			$employee_arr=$this->selectall('employee');
 			include_once('manage_emp.php');
 			break;
+			
 			case '/manage_contact':
+			$contact_arr=$this->selectall('contact');
 			include_once('manage_contact.php');
 			break;
 			

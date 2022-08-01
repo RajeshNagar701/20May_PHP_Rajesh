@@ -23,22 +23,30 @@ include_once('header.php');
 				  <table class="table">
 					<thead>
 					  <tr>
-						<th>Firstname</th>
-						<th>Lastname</th>
+						<th>Contact Id</th>
+						<th>Name</th>
 						<th>Email</th>
-						<th>Edit</th>
+						<th>Message</th>
+						<th>Reply</th>
 						<th>Delete</th>
 					  </tr>
 					</thead>
 					<tbody>
+					<?php 
+					foreach($contact_arr as $c)
+					{
+					?>
 					  <tr>
-						<td>John</td>
-						<td>Doe</td>
-						<td>john@example.com</td>
-						<td><a href="#" class="btn btn-primary">Edit</a></td>
+						<td><?php echo $c->contact_id ?></td>
+						<td><?php echo $c->name ?></td>
+						<td><?php echo $c->email ?></td>
+						<td><?php echo $c->message ?></td>
+						<td><a href="#" class="btn btn-primary">Reply</a></td>
 						<td><a href="#" class="btn btn-danger">Delete</a></td>
 					  </tr>
-					  
+					 <?php
+					}
+					 ?> 
 					</tbody>
 				  </table>
 				</div>

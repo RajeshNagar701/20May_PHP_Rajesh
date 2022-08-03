@@ -277,7 +277,7 @@ include_once('header.php');
 										<li class="twt"><a href="#"><span class="icons"></span><span class="text">Twitter</span></a></li>
 										<li class="ggp"><a href="#"><span class="icons"></span><span class="text">Google+</span></a></li>
 									</ul> 
-									</div>
+						</div>
 								
 					</div>
 				</div>

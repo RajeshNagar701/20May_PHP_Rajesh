@@ -38,12 +38,15 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 				        <div id="sidebar"> 
 						     <h4 class="menu">Menu</h4>
 						          <ul>
-							    <li><a href="cars">New Cars <i class="glyphicon glyphicon-triangle-bottom"> </i> </a>
+							     <li><a href="cars">New Cars <i class="glyphicon glyphicon-triangle-bottom"> </i> </a>
 							      <ul>
+								      <li><a href="index"><span>Home</span></a></li>
 									  <li><a href="cars"><span>Find Cars</span></a></li>
 									  <li><a href="find"><span>Company Cars</span></a></li>
 								   </ul>
 							   </li>
+							   <li><a href="feedback"> Feedback</a></li>
+							   <li><a href="contact">Contact</a></li>
 							  
 						   </ul>
 						   <div id="sidebar-btn">
@@ -66,9 +69,22 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 								</script>
 					    <!-- //sidebar -->
 					  
+					  <?php
+					if(isset($_SESSION['email']))
+					{
+					?>
+					  <div class="tag"><a href="logout"><span class="glyphicon glyphicon-log-in"></span>Logout</a></div>
+					  <div class="tag"><a href="myprofile"><span class="glyphicon glyphicon-log-in"></span>My Profile</a></div>
+					<?php					
+					}
+					else
+					{
+					?>	
 					  <div class="tag"><a href="login" ><span class="glyphicon glyphicon-log-in"></span> login</a></div>
 					  <div class="tag"><a href="signup"><span class="glyphicon glyphicon-log-in"></span> Sign Up</a></div>
-					</div>
+					<?php
+					}
+					?>					</div>
 				  <!-- //header-left -->
 		         
 							</div> 

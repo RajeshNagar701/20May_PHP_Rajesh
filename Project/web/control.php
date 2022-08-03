@@ -6,7 +6,7 @@ class control extends model  // step 2 extends model class
 {
 	function __construct()
 	{
-		
+		session_start();
 		model::__construct(); // step 3 call model __construct
 		
 		$path=$_SERVER['PATH_INFO'];
@@ -84,8 +84,52 @@ class control extends model  // step 2 extends model class
 			break;
 			
 			case '/login':
+			if(isset($_REQUEST['submit']))
+			{
+				$email=$_REQUEST['email'];
+				$password=$_REQUEST['password'];
+				$pass=md5($password);
+				
+				$where=array("email"=>$email,"password"=>$pass);
+				$run=$this->select_where('customer',$where);
+				
+				$res=$run->num_rows; // check cond by rows
+				if($res==1) // 1 means true
+				{
+					
+					$_SESSION['email']=$email;
+					
+					echo "<script> 
+						alert('Login Success') 
+						window.location='index';
+						</script>";
+					
+				}
+				else
+				{
+					echo "<script> 
+						alert('Login Failed due wrong credebntial') 
+						window.location='index';
+						</script>";
+				}
+			}
 			include_once('login.php');
 			break;
+			
+			
+			case '/myprofile':
+			include_once('myprofile.php');
+			break;
+			
+			case '/logout':
+			unset($_SESSION['email']);
+			echo "<script> 
+				alert('Logout Success'); 
+				window.location='index';
+				</script>";
+			
+			break;
+			
 			
 			default:
 			echo "Page Not Found";

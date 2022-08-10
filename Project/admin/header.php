@@ -1,4 +1,18 @@
 
+<?php
+
+if(isset($_SESSION['admin']))
+{
+	
+}
+else
+{
+	echo "<script>
+	window.location='index';
+	</script>";
+}
+?>
+
 <!--
 Author: W3layouts
 Author URL: http://w3layouts.com
@@ -227,7 +241,9 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 					 <li>
                         <a href="manage_feedback" class=" hvr-bounce-to-right"><i class="fa fa-user nav_icon"></i> <span class="nav-label">Manage Feedback</span> </a>
                     </li>
-					
+					 <li>
+                        <a href="admin_logout" class=" hvr-bounce-to-right"><i class="fa fa-user nav_icon"></i> <span class="nav-label">Logout</span> </a>
+                    </li>
                     
                     
                 </ul>

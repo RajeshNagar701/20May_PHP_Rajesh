@@ -54,17 +54,24 @@ include_once('subheader.php');
 		      <h3 class="tittle">Contact</h3>
 				
 				<div class="col-md-5 new-car-used">
-					  <h3 class="tittle top">USED CARS</h3>
-					  <h6 class="sub">Used Cars at Shocking Prices.</h6>
 					  <div class="used-one">
 					     <figure class="effect-zoe">
-							 <a href="used.html"><img src="images/used_car.jpg" alt="Used Car"></a>
-							
+							<img src="upload/customer/<?php echo $fetch->file;?>" alt="Used Car" width="100%"/>
+						  </figure>	
 					  </div>
 					  <div class="clearfix"> </div>
 					   <h1></h1>
-					</div>				
-				</div>	
+				</div>
+			<div class="col-md-5 new-car-used">
+					  <h3 class="tittle top">ID : <?php echo $fetch->cust_id;?></h3>
+					  <h3 class="tittle top">Name : <?php echo $fetch->name;?></h3>
+					  <h6 class="sub">Email : <?php echo $fetch->email;?> </h6>
+					  <h6 class="sub">Gender : <?php echo $fetch->gender;?></h6>
+					  <h6 class="sub">Laungauges : <?php echo $fetch->lag;?></h6>
+					  <a href="edit?edit_cust_id=<?php echo $fetch->cust_id;?>" class="btn btn-primary">Edit</a>
+					  <div class="clearfix"> </div>
+				</div>							
+			</div>	
 		</div>
 		<div class="clearfix"></div>
 		<!-- //Services -->

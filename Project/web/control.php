@@ -118,8 +118,24 @@ class control extends model  // step 2 extends model class
 			
 			
 			case '/myprofile':
+			$where=array("email"=>$_SESSION['email']);
+			$run=$this->select_where('customer',$where);
+			$fetch=$run->fetch_object();
 			include_once('myprofile.php');
 			break;
+			
+			case '/edit':
+			if(isset($_REQUEST['edit_cust_id']))
+			{
+				$cust_id=$_REQUEST['edit_cust_id'];
+				$where=array("cust_id"=>$cust_id);
+				$run=$this->select_where('customer',$where);
+				$fetch=$run->fetch_object();
+			}
+			include_once('editprofile.php');
+			break;
+			
+			
 			
 			case '/logout':
 			unset($_SESSION['email']);

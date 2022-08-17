@@ -90,7 +90,7 @@ include_once('subheader.php');
 					?>/>
 					<br>	
 					<br>
-					Upload Profile: <input type="file" name="file"  value="<?php echo $fetch->name?>"  placeholder="file" class="form-control" required=""/><br>
+					Upload Profile: <input type="file" name="file"  value="<?php echo $fetch->name?>"  placeholder="file" class="form-control"/><br>
 					<img src="upload/customer/<?php echo $fetch->file;?>" alt="Used Car" width="50px"/>
 					<br><br>
 					<input type="submit" name="submit" value="Save"  class="btn btn-primary" />

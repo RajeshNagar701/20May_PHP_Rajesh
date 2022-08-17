@@ -131,6 +131,49 @@ class control extends model  // step 2 extends model class
 				$where=array("cust_id"=>$cust_id);
 				$run=$this->select_where('customer',$where);
 				$fetch=$run->fetch_object();
+				$old_file=$fetch->file;
+				
+				if(isset($_REQUEST['submit']))
+				{
+					
+					$name=$_REQUEST['name'];
+					$email=$_REQUEST['email'];
+					$gender=$_REQUEST['gender'];
+					$lag_arr=$_REQUEST['lag'];
+					$lag=implode(",",$lag_arr);
+					
+					if($_FILES['file']['size']>0)
+					{
+						$file=$_FILES['file']['name'];  // get only input type="file"
+						$path='upload/customer/'.$file;
+						$dup_file=$_FILES['file']['tmp_name'];// duplicate file get	
+						move_uploaded_file($dup_file,$path);
+						
+						$arr=array("name"=>$name,"email"=>$email,"gender"=>$gender,"lag"=>$lag,"file"=>$file);
+						$res=$this->update('customer',$arr,$where);
+						if($res)
+						{
+							unlink('upload/customer/'.$old_file);
+							echo "<script> 
+							alert('Update Success'); 
+							window.location='myprofile';
+							</script>";
+						}
+					}
+					else
+					{
+						$arr=array("name"=>$name,"email"=>$email,"gender"=>$gender,"lag"=>$lag);
+						$res=$this->update('customer',$arr,$where);
+						if($res)
+						{
+							echo "<script> 
+							alert('Update Success'); 
+							window.location='myprofile';
+							</script>";
+						}
+					}
+				}
+				
 			}
 			include_once('editprofile.php');
 			break;

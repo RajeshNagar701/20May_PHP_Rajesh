@@ -92,24 +92,32 @@ class control extends model  // step 2 extends model class
 				
 				$where=array("email"=>$email,"password"=>$pass);
 				$run=$this->select_where('customer',$where);
-				
 				$res=$run->num_rows; // check cond by rows
 				if($res==1) // 1 means true
 				{
-					
-					$_SESSION['email']=$email;
-					
-					echo "<script> 
-						alert('Login Success') 
-						window.location='index';
+					$data=$run->fetch_object();
+					$status=$data->status;
+					if($status=="Unblock")
+					{	
+						$_SESSION['email']=$email;	
+						echo "<script> 
+							alert('Login Success') 
+							window.location='index';
+							</script>";
+					}	
+					else
+					{
+						echo "<script> 
+						alert('Login Failed due Blocked') 
+						window.location='login';
 						</script>";
-					
+					}
 				}
 				else
 				{
 					echo "<script> 
 						alert('Login Failed due wrong credebntial') 
-						window.location='index';
+						window.location='login';
 						</script>";
 				}
 			}

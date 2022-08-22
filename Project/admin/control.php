@@ -127,6 +127,48 @@ class control extends model
 			
 			break;
 			
+			
+			case '/status':
+			
+			if(isset($_REQUEST['status_cust_id']))
+			{
+				$cust_id=$_REQUEST['status_cust_id'];
+				$where=array("cust_id"=>$cust_id);
+				
+				// status get
+				$run=$this->select_where('customer',$where);
+				$fetch=$run->fetch_object();
+				$status=$fetch->status;
+				
+				if($status=="Block")
+				{
+					$arr=array("status"=>"Unblock");
+					$res=$this->update('customer',$arr,$where);
+					if($res) // 1 means true
+					{
+						echo "<script> 
+							alert('Unblock Success') 
+							window.location='manage_user';
+							</script>";
+					}
+				}
+				else
+				{
+					$arr=array("status"=>"Block");
+					$res=$this->update('customer',$arr,$where);
+					if($res) // 1 means true
+					{
+						unset($_SESSION['email']);
+						echo "<script> 
+							alert('Block Success') 
+							window.location='manage_user';
+							</script>";
+					}
+				}
+			}
+			
+			break;
+			
 			default:
 			include_once('404.php');
 			break;

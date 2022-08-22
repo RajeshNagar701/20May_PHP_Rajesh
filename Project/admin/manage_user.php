@@ -45,7 +45,7 @@ include_once('header.php');
 						<td><?php echo $c->email;?></td>
 						<td><?php echo $c->gender;?></td>
 						<td><?php echo $c->lag;?></td>
-						<td><a href="#" class="btn btn-primary">Edit</a></td>
+						<td><a href="status?status_cust_id=<?php echo $c->cust_id ?>" class="btn btn-primary"><?php echo $c->status;?></a></td>
 						<td><a href="delete?del_cust_id=<?php echo $c->cust_id ?>" class="btn btn-danger">Delete</a></td>
 					  </tr>
 					 <?php

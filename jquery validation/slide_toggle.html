@@ -21,13 +21,11 @@ slideToggle()
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script> 
 $(document).ready(function(){
-  $("#flip").mouseenter(function(){
-    $("#panel").slideDown(3000);
+  $("#flip").click(function(){
+    $("#panel").slideToggle(1000);
   });
   
-   $("#flip").mouseleave(function(){
-    $("#panel").slideUp(3000);
-  });
+  
   
 });
 </script>

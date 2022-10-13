@@ -24,6 +24,7 @@ class c
 
 $obj=new c();
 $obj->test();
+$obj->sample();
 
 
 ?>

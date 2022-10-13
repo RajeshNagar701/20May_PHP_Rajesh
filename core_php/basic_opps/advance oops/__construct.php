@@ -31,7 +31,7 @@ class abc
 	{
 		echo "Simple Function ";
 	}
-	function __construct()
+	function __construct() // function abc()
 	{
 		echo "Magic function run auto matecaly";
 	}

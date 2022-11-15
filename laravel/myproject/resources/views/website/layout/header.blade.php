@@ -28,8 +28,14 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 	<link href='//fonts.googleapis.com/css?family=Wallpoet' rel='stylesheet' type='text/css'>
 	<link href='//fonts.googleapis.com/css?family=Ubuntu:400,500,700,300' rel='stylesheet' type='text/css'>
 <!--//web-fonts-->
+
+
+
 </head>
 <body>
+
+@include('sweetalert::alert')
+
 <!--/banner-section-->
 		<div id="demo-1" class="banner-inner">
 	 <div class="banner-inner-dott">

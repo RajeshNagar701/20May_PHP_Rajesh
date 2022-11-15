@@ -39,14 +39,15 @@
 	     <div class="container">
 		      <h3 class="tittle">Signup</h3>
 				
-				<form action="" method="post" enctype="multipart/form-data">
+				<form action="{{url('/signup_store')}}" method="post" enctype="multipart/form-data">
+					@csrf
 					Name: <input type="text" name="name"  placeholder="Name" class="form-control" required=""/><br>
-					Email: <input type="email" name="email"  placeholder="Email" class="form-control" required=""/><br>
-					Password: <input type="password" name="password"  placeholder="Password" class="form-control" required=""/><br>
+					Email: <input type="email" name="unm"  placeholder="Email" class="form-control" required=""/><br>
+					Password: <input type="password" name="pass"  placeholder="Password" class="form-control" required=""/><br>
 					
 					Gender: <br>
-					Male: <input type="radio" name="gender"  value="Male"/>
-					Female: <input type="radio" name="gender" value="Female" /><br><br>
+					Male: <input type="radio" name="gen"  value="Male"/>
+					Female: <input type="radio" name="gen" value="Female" /><br><br>
 					
 					Launguages: <br>
 					Hindi: <input type="checkbox" name="lag[]"  value="Hindi"/>

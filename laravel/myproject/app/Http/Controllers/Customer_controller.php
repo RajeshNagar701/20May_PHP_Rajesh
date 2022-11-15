@@ -1,10 +1,16 @@
 <?php
 
 namespace App\Http\Controllers;
+use Illuminate\Http\Request;
 
 use App\Models\customer;
-use Illuminate\Http\Request;
 use App\Models\countri;
+use Hash;
+use Alert;
+
+// crud when use query builder / DB class
+use Illuminate\Support\Facades\DB;  
+
 
 class Customer_controller extends Controller
 {
@@ -25,7 +31,9 @@ class Customer_controller extends Controller
      */
     public function create()
     {
-        //
+       //$country=DB::select("select * from countris"); // fetch data by DB Class
+	   $country=countri::all();  // fetch data by ORM / Model
+	   return view('website.signup',["data"=>$country]);
     }
 
     /**
@@ -36,8 +44,26 @@ class Customer_controller extends Controller
      */
     public function store(Request $request)
     {
-	   $country=countri::all();	
-       return view('website.signup',["data"=>$country]);
+	   
+	  
+	   
+	   $data=new customer;
+	   $data->name=$request->name;
+	   $data->unm=$request->unm;
+	   $data->pass=Hash::make($request->pass);
+	   $data->gen=$request->gen;
+	   $data->lag=implode(",",$request->lag);
+	   
+	   // image uploading
+	   $file=$request->file('file');		
+	   $filename=time().'_img.'.$request->file('file')->getClientOriginalExtension();
+	   $file->move('Frontend/upload/customer/',$filename);  // use move for move image in public/images
+	   $data->file=$filename; // name store in db
+	   
+	   $data->cid=$request->cid;
+	   $data->save();
+	   Alert::success('Congrats', 'You\'ve Successfully Registered');	
+	   return back();	
     }
 	
 	

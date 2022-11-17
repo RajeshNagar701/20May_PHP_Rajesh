@@ -7,6 +7,7 @@ use App\Models\customer;
 use App\Models\countri;
 use Hash;
 use Alert;
+use session;
 
 // crud when use query builder / DB class
 use Illuminate\Support\Facades\DB;  
@@ -71,6 +72,54 @@ class Customer_controller extends Controller
     {
         return view('website.login');
     }
+	
+	public function userlogin(Request $request)
+    {
+		$unm=$request->unm;
+		$data=customer::where('unm','=',$unm)->first();
+	
+		if($data)
+		{	
+			if(Hash::check($request->pass,$data->pass))
+			{
+				 if($data->status=="Unblock")
+				 {
+				  Session()->put('name',$data->name);	 
+				  Session()->put('unm',$data->unm);
+				  Session()->put('cust_id',$data->id);
+				  Alert::success('Congrats', 'You\'ve Login Successfully');	
+				  return redirect('/index');
+				 }
+				 else
+				 {
+				 	 Alert::error('Failed', 'You\'ve Accout Blocked');	
+					 return back();		
+				 }	
+			}
+			else
+			{
+				 Alert::error('Failed', 'You\'ve Wrong Password');	
+				 return back();		
+			}
+			
+		}
+		else
+		{
+			 Alert::error('Failed', 'You\'ve Wrong Username');	
+			 return back();		
+		}
+	}
+	
+	public function logout()
+    {
+        Session()->pull('cust_id');
+        Session()->pull('unm');
+        Session()->pull('name');
+		
+        Alert::success('Congrats', 'You\'ve Logout Successfully');	
+		return redirect('/index');
+    }
+	
 
     /**
      * Display the specified resource.

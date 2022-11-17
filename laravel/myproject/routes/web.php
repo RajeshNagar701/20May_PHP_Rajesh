@@ -68,11 +68,11 @@ Route::get('/login', function () {
 });
 */
 
-Route::get('/login',[Customer_controller::class,'login']);
+
 
 
 Route::get('/signup',[Customer_controller::class,'create']);
 Route::post('/signup_store',[Customer_controller::class,'store']);
-
-
-
+Route::get('/login',[Customer_controller::class,'login']);
+Route::post('/userlogin',[Customer_controller::class,'userlogin']);
+Route::get('/logout',[Customer_controller::class,'logout']);

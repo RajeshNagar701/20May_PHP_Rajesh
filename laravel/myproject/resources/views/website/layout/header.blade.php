@@ -77,11 +77,12 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 					    <!-- //sidebar -->
 						
 					<?php
-					if(isset($_SESSION['email']))
+					if(session()->has('cust_id'))
 					{
 					?>
 					  <div class="tag"><a href="{{url('/logout')}}"><span class="glyphicon glyphicon-log-in"></span>Logout</a></div>
-					   <div class="tag"><a href="{{url('/myprofile')}}"><span class="glyphicon glyphicon-log-in"></span>My Profile</a></div>	
+					   <div class="tag"><a href="{{url('/myprofile')}}"><span class="glyphicon glyphicon-log-in"></span>My Profile &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Hi ... <?php echo session('name')?></a>  </div>
+					   
 					<?php
 					}
 					else

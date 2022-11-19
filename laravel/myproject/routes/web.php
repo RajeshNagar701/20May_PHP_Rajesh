@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\InvokableController;
 use App\Http\Controllers\Customer_controller;
-
+use App\Http\Controllers\adminController;
 
 
 /*
@@ -76,3 +76,13 @@ Route::post('/signup_store',[Customer_controller::class,'store']);
 Route::get('/login',[Customer_controller::class,'login']);
 Route::post('/userlogin',[Customer_controller::class,'userlogin']);
 Route::get('/logout',[Customer_controller::class,'logout']);
+
+// admin
+ Route::get('/admin',[adminController::class,'index']);
+ Route::post('/admin_auth',[adminController::class,'login']);
+ Route::view('/dashboard','admin.dashboard');
+ Route::get('/admin_logout',[adminController::class,'admin_logout']);
+ 
+
+ Route::get('/manage_customer',[Customer_controller::class,'index']);
+ Route::get('/manage_customer/{id}',[Customer_controller::class,'destroy']);

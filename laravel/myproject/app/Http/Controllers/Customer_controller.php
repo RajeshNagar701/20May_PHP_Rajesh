@@ -22,7 +22,10 @@ class Customer_controller extends Controller
      */
     public function index()
     {
-        //
+        //$data=customer::all();
+		//$data=customer::where('id','=',$id)->where('status','=','Unblock')->get()/first();
+		$data=customer::join('countris','customers.cid','=','countris.id')->get();
+		return view('admin.manage_customer',['cust_arr'=>$data]);
     }
 
     /**
@@ -161,8 +164,26 @@ class Customer_controller extends Controller
      * @param  \App\Models\customer  $customer
      * @return \Illuminate\Http\Response
      */
-    public function destroy(customer $customer)
+    public function destroy($id)
     {
-        //
+       $customer=customer::find($id);
+	   $customer->delete();
+	   Alert::success('Congrats', 'You\'ve Delete Successfully');	
+	   return back();
+	   
+	   /*
+	   try{
+			$data=customer::findorFail($id);
+			$data->delete();
+			Alert::success('Done', 'You\'ve Successfully Delete');
+			return back();
+		}
+		catch(\Exception $ex)
+		{
+			Alert::error('Fail', 'Something went wrong or Some Data alreday added in other data');
+			return back();
+		}
+	   */
+	   
     }
 }

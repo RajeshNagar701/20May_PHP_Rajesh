@@ -38,25 +38,34 @@
 	     <div class="container">
 		      <h3 class="tittle">Edit Profile</h3>
 				
-				<form action="" method="post" enctype="multipart/form-data">
-					Name: <input type="text" name="name" value="<?php echo $fetch->name?>"  placeholder="Name" class="form-control" required=""/><br>
-					Email: <input type="email" name="email" value="<?php echo $fetch->email?>"  placeholder="Email" class="form-control" required=""/><br>
+				<form action="{{url('myprofileupdate/'.$fetch->id)}}" method="post" enctype="multipart/form-data">
+					@csrf
+					Name: <input type="text" name="name" value="<?php echo $fetch->name?>"  placeholder="Name" class="form-control"/>
+					@error('name')
+						<div class="alert alert-danger">{{ $message }}</div>
+					@enderror
+					<br>
+					Email: <input type="email" name="unm" value="<?php echo $fetch->unm?>"  placeholder="Email" class="form-control" readonly />
+					@error('unm')
+						<div class="alert alert-danger">{{ $message }}</div>
+					@enderror
+					<br>
 					
 					Gender: <br>
-					<?php
-					$gender=$fetch->gender;
+					<?php 
+					$gender=$fetch->gen;
 					if($gender=="Male")
 					{
 					?>
-					Male: <input type="radio" name="gender"  value="Male" checked/>
-					Female: <input type="radio" name="gender" value="Female" /><br><br>
+					Male: <input type="radio" name="gen"  value="Male" checked/>
+					Female: <input type="radio" name="gen" value="Female" /><br><br>
 					<?php
 					}
 					else
 					{
 					?>
-					Male: <input type="radio" name="gender"  value="Male" />
-					Female: <input type="radio" name="gender" value="Female" checked /><br><br>
+					Male: <input type="radio" name="gen"  value="Male" />
+					Female: <input type="radio" name="gen" value="Female" checked /><br><br>
 					<?php
 					}
 					?>
@@ -88,9 +97,27 @@
 					?>/>
 					<br>	
 					<br>
-					Upload Profile: <input type="file" name="file"  value="<?php echo $fetch->name?>"  placeholder="file" class="form-control"/><br>
-					<img src="upload/customer/<?php echo $fetch->file;?>" alt="Used Car" width="50px"/>
+					Upload Profile: <input type="file" name="file"  placeholder="file" class="form-control"/><br>
+					<img src="{{url('Frontend/upload/customer/'.$fetch->file)}}" alt="Used Car" width="50px"/>
+					@error('file')
+						<div class="alert alert-danger">{{ $message }}</div>
+					@enderror
 					<br><br>
+
+					<select name="cid" class="form-control" >
+						<option value="">Select Countries</option>
+						@foreach($data as $d)
+							@if($d->id==$fetch->cid)
+								<option value="{{$d->id}}" selected>{{$d->cnm}}</option>
+							@else
+							<option value="{{$d->id}}">{{$d->cnm}}</option>		
+							@endif		
+						@endforeach
+					</select>
+					@error('cid')
+						<div class="alert alert-danger">{{ $message }}</div>
+					@enderror
+					<br>
 					<input type="submit" name="submit" value="Save"  class="btn btn-primary" />
 				</form>
 				

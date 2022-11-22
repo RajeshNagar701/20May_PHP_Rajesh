@@ -48,8 +48,15 @@ class Customer_controller extends Controller
      */
     public function store(Request $request)
     {
+	   $data=$request->validate([
 	   
-	  
+	   'name'=>'required|Alpha',
+	   'unm'=>'required|email|unique:customers',
+	   'pass'=>'required|min:6|max:12',
+	   'file'=>'required|mimes:jpg,png,jpeg,gif',
+	   'cid'=>'required',
+	   ]);
+		
 	   
 	   $data=new customer;
 	   $data->name=$request->name;
@@ -78,6 +85,11 @@ class Customer_controller extends Controller
 	
 	public function userlogin(Request $request)
     {
+		$data=$request->validate([
+	   'unm'=>'required|email',
+	   'pass'=>'required|min:4|max:12',
+	   ]);
+		
 		$unm=$request->unm;
 		$data=customer::where('unm','=',$unm)->first();
 	
@@ -91,7 +103,7 @@ class Customer_controller extends Controller
 				  Session()->put('unm',$data->unm);
 				  Session()->put('cust_id',$data->id);
 				  Alert::success('Congrats', 'You\'ve Login Successfully');	
-				  return redirect('/index');
+				  return redirect('/');
 				 }
 				 else
 				 {
@@ -130,9 +142,10 @@ class Customer_controller extends Controller
      * @param  \App\Models\customer  $customer
      * @return \Illuminate\Http\Response
      */
-    public function show(customer $customer)
+    public function myprofile()
     {
-        //
+	   $data=customer::where('id','=',session('cust_id'))->first();
+       return view('website.myprofile',['fetch'=>$data]);
     }
 
     /**
@@ -141,9 +154,11 @@ class Customer_controller extends Controller
      * @param  \App\Models\customer  $customer
      * @return \Illuminate\Http\Response
      */
-    public function edit(customer $customer)
+    public function edit($id)
     {
-        //
+		$country=countri::all();
+		$data=customer::where('id','=',$id)->first();
+        return view('website.editprofile',['data'=>$country,'fetch'=>$data]);
     }
 
     /**
@@ -153,9 +168,45 @@ class Customer_controller extends Controller
      * @param  \App\Models\customer  $customer
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, customer $customer)
+    public function update(Request $request,$id)
     {
-        //
+        $data=$request->validate([
+	   
+	   'name'=>'required|Alpha',
+	   'unm'=>'required|email',
+	   'file'=>'mimes:jpg,png,jpeg,gif',
+	   'cid'=>'required',
+	   ]);
+	   
+	   $data=customer::find($id);
+	   $data->name=$request->name;
+	   $data->unm=$request->unm;
+	   $data->pass=Hash::make($request->pass);
+	   $data->gen=$request->gen;
+	   $data->lag=implode(",",$request->lag);
+	   
+	   // image uploading
+	   if($request->hasFile('file'))
+	   {
+		   $old_file=$data->file;
+		   
+		   $file=$request->file('file');		
+		   $filename=time().'_img.'.$request->file('file')->getClientOriginalExtension();
+		   $file->move('Frontend/upload/customer/',$filename);  // use move for move image in public/images
+		   $data->file=$filename; // name store in db
+		   unlink('Frontend/upload/customer/'.$old_file);
+	   }
+	   
+	   $data->cid=$request->cid;
+	   $data->save();
+	   
+	   Alert::success('Congrats', 'You\'ve Successfully Update');	
+	   return redirect('myprofile');	
+	   
+	   //$data=customer::find($id)->update(['name'=>"Raj nagar","age"=>"33"]);
+	   
+	   
+	   
     }
 
     /**

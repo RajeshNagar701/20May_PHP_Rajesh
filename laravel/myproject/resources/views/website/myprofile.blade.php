@@ -58,19 +58,19 @@ else
 				<div class="col-md-5 new-car-used">
 					  <div class="used-one">
 					     <figure class="effect-zoe">
-							<img src="upload/customer/<?php echo $fetch->file;?>" alt="Used Car" width="100%"/>
+							<img src="{{url('Frontend/upload/customer/'.$fetch->file)}}" alt="Used Car" height="250px" width="100%"/>
 						  </figure>	
 					  </div>
 					  <div class="clearfix"> </div>
 					   <h1></h1>
 				</div>
 			<div class="col-md-5 new-car-used">
-					  <h3 class="tittle top">ID : <?php echo $fetch->cust_id;?></h3>
-					  <h3 class="tittle top">Name : <?php echo $fetch->name;?></h3>
-					  <h6 class="sub">Email : <?php echo $fetch->email;?> </h6>
-					  <h6 class="sub">Gender : <?php echo $fetch->gender;?></h6>
-					  <h6 class="sub">Laungauges : <?php echo $fetch->lag;?></h6>
-					  <a href="edit?edit_cust_id=<?php echo $fetch->cust_id;?>" class="btn btn-primary">Edit</a>
+					  <h3 class="tittle top">ID : {{$fetch->id}}</h3>
+					  <h3 class="tittle top">Name : {{$fetch->name}}</h3>
+					  <h6 class="sub">Email : {{ $fetch->unm}} </h6>
+					  <h6 class="sub">Gender : {{$fetch->gen}}</h6>
+					  <h6 class="sub">Laungauges : {{$fetch->lag}}</h6>
+					  <a href="{{url('myprofile/'.$fetch->id)}}" class="btn btn-primary">Edit</a>
 					  <div class="clearfix"> </div>
 				</div>							
 			</div>	

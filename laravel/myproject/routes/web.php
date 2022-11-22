@@ -43,6 +43,9 @@ Route::get('/invoke',InvokableController::class);
 Route::get('/', function () {
     return view('website.index');
 });
+Route::get('/index', function () {
+    return view('website.index');
+});
 
 Route::get('/cars', function () {
     return view('website.cars');
@@ -76,6 +79,10 @@ Route::post('/signup_store',[Customer_controller::class,'store']);
 Route::get('/login',[Customer_controller::class,'login']);
 Route::post('/userlogin',[Customer_controller::class,'userlogin']);
 Route::get('/logout',[Customer_controller::class,'logout']);
+Route::get('/myprofile',[Customer_controller::class,'myprofile']);
+Route::get('/myprofile/{id}',[Customer_controller::class,'edit']);
+Route::post('/myprofileupdate/{id}',[Customer_controller::class,'update']);
+
 
 // admin
  Route::get('/admin',[adminController::class,'index']);

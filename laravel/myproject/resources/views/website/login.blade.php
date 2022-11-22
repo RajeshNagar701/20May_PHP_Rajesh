@@ -41,8 +41,16 @@
 				
 				 <form action="{{url('/userlogin')}}" method="post" enctype="multipart/form-data">
 					@csrf
-					Email: <input type="email" name="unm"  placeholder="Email" class="form-control" required=""/><br>
-					Password: <input type="password" name="pass"  placeholder="Password" class="form-control" required=""/><br>
+					Email: <input type="email" name="unm" value="{{old('unm')}}"  placeholder="Email" class="form-control" />
+					@error('unm')
+						<div class="alert alert-danger">{{ $message }}</div>
+					@enderror
+					<br>
+					Password: <input type="password" name="pass" value="{{old('pass')}}"  placeholder="Password" class="form-control" />
+					@error('pass')
+						<div class="alert alert-danger">{{ $message }}</div>
+					@enderror
+					<br>
 					
 					<input type="submit" name="submit" value="Login"  class="btn btn-primary" />
 				</form>

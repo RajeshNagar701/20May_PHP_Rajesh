@@ -37,13 +37,38 @@
 		<!-- Services -->
 	<div class="updates-agile">
 	     <div class="container">
+				<!--
+				@if ($errors->any())
+					<div class="alert alert-danger">
+						<ul>
+							@foreach ($errors->all() as $error)
+								<li>{{ $error }}</li>
+							@endforeach
+						</ul>
+					</div>
+				@endif
+				-->
+
 		      <h3 class="tittle">Signup</h3>
 				
 				<form action="{{url('/signup_store')}}" method="post" enctype="multipart/form-data">
 					@csrf
-					Name: <input type="text" name="name"  placeholder="Name" class="form-control" required=""/><br>
-					Email: <input type="email" name="unm"  placeholder="Email" class="form-control" required=""/><br>
-					Password: <input type="password" name="pass"  placeholder="Password" class="form-control" required=""/><br>
+					Name: <input type="text" name="name" value="{{old('name')}}" placeholder="Name" class="form-control"/>
+					@error('name')
+						<div class="alert alert-danger">{{ $message }}</div>
+					@enderror
+
+					<br>
+					Email: <input type="email" name="unm" value="{{old('unm')}}" placeholder="Email" class="form-control"/>
+					@error('unm')
+						<div class="alert alert-danger">{{ $message }}</div>
+					@enderror
+					<br>
+					Password: <input type="password" name="pass" value="{{old('pass')}}"  placeholder="Password" class="form-control" />
+					@error('pass')
+						<div class="alert alert-danger">{{ $message }}</div>
+					@enderror
+					<br>
 					
 					Gender: <br>
 					Male: <input type="radio" name="gen"  value="Male"/>
@@ -55,7 +80,11 @@
 					English: <input type="checkbox" name="lag[]"  value="English"/>
 					<br>	
 					<br>
-					Upload Profile: <input type="file" name="file"  placeholder="file" class="form-control" required=""/><br>
+					Upload Profile: <input type="file" name="file"  placeholder="file" class="form-control" />
+					@error('file')
+						<div class="alert alert-danger">{{ $message }}</div>
+					@enderror
+					<br>
 					<br>
 					<select name="cid" class="form-control" >
 						<option value="">Select Countries</option>
@@ -63,6 +92,9 @@
 							<option value="{{$d->id}}">{{$d->cnm}}</option>	
 						@endforeach
 					</select>
+					@error('cid')
+						<div class="alert alert-danger">{{ $message }}</div>
+					@enderror
 					<br>
 					
 					

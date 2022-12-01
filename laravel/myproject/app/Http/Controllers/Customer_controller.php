@@ -74,7 +74,7 @@ class Customer_controller extends Controller
 	   $data->cid=$request->cid;
 	   $data->save();
 	   Alert::success('Congrats', 'You\'ve Successfully Registered');	
-	   return back();	
+	   return back()->with('success',$request->name);	
     }
 	
 	

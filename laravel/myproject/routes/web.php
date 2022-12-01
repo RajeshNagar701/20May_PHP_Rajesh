@@ -71,18 +71,24 @@ Route::get('/login', function () {
 });
 */
 
+// MAKE group middleware
+Route::group(['middleware'=>['beforlogin']],function(){
 
-
-
-Route::get('/signup',[Customer_controller::class,'create']);
+Route::get('/signup',[Customer_controller::class,'create']);//->middleware('beforlogin');  // route middleware
 Route::post('/signup_store',[Customer_controller::class,'store']);
 Route::get('/login',[Customer_controller::class,'login']);
 Route::post('/userlogin',[Customer_controller::class,'userlogin']);
-Route::get('/logout',[Customer_controller::class,'logout']);
-Route::get('/myprofile',[Customer_controller::class,'myprofile']);
-Route::get('/myprofile/{id}',[Customer_controller::class,'edit']);
-Route::post('/myprofileupdate/{id}',[Customer_controller::class,'update']);
 
+});
+
+
+Route::group(['middleware'=>['afterlogin']],function(){
+	
+	Route::get('/logout',[Customer_controller::class,'logout']);
+	Route::get('/myprofile',[Customer_controller::class,'myprofile']);//->middleware('beforlogin');// route middleware
+	Route::get('/myprofile/{id}',[Customer_controller::class,'edit']);
+	Route::post('/myprofileupdate/{id}',[Customer_controller::class,'update']);
+});
 
 // admin
  Route::get('/admin',[adminController::class,'index']);

@@ -51,6 +51,11 @@
 
 		      <h3 class="tittle">Signup</h3>
 				
+				@if(session('success'))
+				<span class="alert alert-success">{{session('success')}} is added success</span>
+				<br>
+				@endif
+
 				<form action="{{url('/signup_store')}}" method="post" enctype="multipart/form-data">
 					@csrf
 					Name: <input type="text" name="name" value="{{old('name')}}" placeholder="Name" class="form-control"/>
